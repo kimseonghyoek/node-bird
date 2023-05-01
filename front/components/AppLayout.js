@@ -36,7 +36,7 @@ const AppLayout = ({ children }) => {
           {children}
         </Col>
         <Col xs={24} md={6}>
-          오른쪽 메뉴
+          <a href="https://overloper0225.tistory.com" target="_blank" rel="noreferrer noopener">Mady by Overloper</a>
         </Col>
       </Row>
     </div>
