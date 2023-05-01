@@ -5,9 +5,13 @@ import styled from "styled-components";
 
 const ButtonWrap = styled.div`
   margin-top: 10px;
-`
+`;
 
-const LoginForm = () => {
+const FormWrapper = styled(Form)`
+  padding: 10px;
+`;
+
+const LoginForm = ({ setLoggedIn }) => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 
@@ -20,8 +24,13 @@ const LoginForm = () => {
     setPw(e.target.value);
   }, []);
 
+  const onSubmitForm = useCallback(() => {
+      console.log(id, pw);
+      setLoggedIn(true);
+  }, [id, pw]);
+
   return (
-    <Form>
+    <FormWrapper onFinish={onSubmitForm}>
       <div>
         <label htmlFor="user-id">아이디</label>
         <br />
@@ -36,7 +45,7 @@ const LoginForm = () => {
         <Button type="primary" htmlType="submit" loading={false}>로그인</Button>
         <Link href="/signup"><a><Button>회원가입</Button></a></Link>
       </ButtonWrap>
-    </Form>
+    </FormWrapper>
   );
 };
 
