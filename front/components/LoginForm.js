@@ -1,6 +1,11 @@
 import { Button, Form, Input } from "antd";
 import Link from "next/dist/client/link";
 import React, { useCallback, useState } from "react";
+import styled from "styled-components";
+
+const ButtonWrap = styled.div`
+  margin-top: 10px;
+`
 
 const LoginForm = () => {
   const [id, setId] = useState("");
@@ -25,12 +30,12 @@ const LoginForm = () => {
       <div>
         <label htmlFor="user-pw">비밀번호</label>
         <br />
-        <Input name="user-pw" value={pw} onChange={onChagePw} required />
+        <Input.Password name="user-pw" value={pw} onChange={onChagePw} required />
       </div>
-      <div>
+      <ButtonWrap>
         <Button type="primary" htmlType="submit" loading={false}>로그인</Button>
         <Link href="/signup"><a><Button>회원가입</Button></a></Link>
-      </div>
+      </ButtonWrap>
     </Form>
   );
 };
