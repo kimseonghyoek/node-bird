@@ -1,7 +1,9 @@
 import { Button, Form, Input } from "antd";
 import Link from "next/dist/client/link";
 import React, { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { loginAction } from "../reducers";
 
 const ButtonWrap = styled.div`
   margin-top: 10px;
@@ -11,7 +13,8 @@ const FormWrapper = styled(Form)`
   padding: 10px;
 `;
 
-const LoginForm = ({ setLoggedIn }) => {
+const LoginForm = () => {
+  const dispatch = useDispatch();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 
@@ -26,7 +29,7 @@ const LoginForm = ({ setLoggedIn }) => {
 
   const onSubmitForm = useCallback(() => {
       console.log(id, pw);
-      setLoggedIn(true);
+      dispatch(loginAction(id, pw));
   }, [id, pw]);
 
   return (
