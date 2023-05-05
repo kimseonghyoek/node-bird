@@ -1,3 +1,5 @@
+import { HYDRATE } from "next-redux-wrapper";
+
 const initialState = {
   user: {
     isLoggedIn: false,
@@ -10,10 +12,13 @@ const initialState = {
   },
 };
 
-export const loginAction = (data) => {
+export const loginAction = (id, pw) => {
   return {
     type: "LOG_IN",
-    data: data,
+    data: {
+      id: id,
+      pw: pw
+    }
   };
 };
 
@@ -26,21 +31,21 @@ export const logoutAction = () => {
 // async action creater
 
 // action creater
-const changeNickName = (data) => { // eslint-disable-line no-unused-vars
+const changeNickName = (data) => {   // eslint-disable-line no-unused-vars
   return {
     type: "CHANGE_NICKNAME",
     data: data,
   };
 };
 
-// const changeName = {
-//   type: 'CHANGE_NICKNAME',
-//   data: 'son'
-// };
-
 // (이전 상태, 액션) => 다음 상태
 const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
+  switch (action.type) {  
+    case HYDRATE:
+      return {
+        ...state,
+        ...action.payload,
+      };
     case "LOG_IN":
       return {
         ...state,
@@ -55,13 +60,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: {
           isLoggedIn: false,
-          user: null
+          user: null,
         },
       };
-    default: 
+    default:
       return {
-        ...state
-      }
+        ...state,
+      };
   }
 };
 
