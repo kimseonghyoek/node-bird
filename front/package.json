@@ -13,7 +13,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "antd": "^5.4.6",
     "next": "^9.5.5",
-    "next-redux-wrapper": "^8.1.0",
+    "next-redux-wrapper": "^6.0.2",
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
