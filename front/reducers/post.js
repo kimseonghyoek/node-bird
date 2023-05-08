@@ -7,7 +7,7 @@ export const initalState = {
         nickname: "overloper",
       },
       content: "첫 번째 포스트! #해시태그 #First!!!",
-      Image: [
+      Images: [
         {
           src: "https://i.pinimg.com/564x/60/30/fc/6030fca082167f3932af377cdb4f47bc.jpg",
         },
@@ -38,7 +38,7 @@ const dummyPost = {
     id: 1,
     nickname: "overloper"
   },
-  Image: [],
+  Images: [],
   Comment: [],
 }
 
