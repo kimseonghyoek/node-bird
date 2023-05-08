@@ -10,6 +10,7 @@ const Home = () => {
   return (
     <AppLayout>
       { isLoggedIn && <PostForm/>}
+      {/* eslint-disable-next-line react/jsx-key */}
       { mainPosts.map((post) => <PostCard id={post.id} post={post}/>)}
     </AppLayout>
   );
