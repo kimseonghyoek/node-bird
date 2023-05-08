@@ -15,7 +15,7 @@ const UserProfile = () => {
             <div key="following">팔로잉<br/></div>,
             <div key="follower">팔로워<br/></div>,
         ]}>
-            <Card.Meta title="Overloper" avatar={<Avatar>OV</Avatar>}/>
+            <Card.Meta title="overloper" avatar={<Avatar>o</Avatar>}/>
             <Button onClick={onLogOut}>로그아웃</Button>
         </Card>
     );
