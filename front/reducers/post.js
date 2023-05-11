@@ -11,6 +11,9 @@ export const initalState = {
         {
           src: "https://i.pinimg.com/564x/60/30/fc/6030fca082167f3932af377cdb4f47bc.jpg",
         },
+        {
+          src: "https://i.pinimg.com/564x/60/30/fc/6030fca082167f3932af377cdb4f47bc.jpg",
+        },
         
       ],
       Comment: [
