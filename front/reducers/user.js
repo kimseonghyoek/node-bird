@@ -5,19 +5,42 @@ export const initalState = {
   loginData: {},
 };
 
-export const loginAction = (id, pw) => {
+export const loginRequestAction = (id, pw) => {
   return {
-    type: "LOG_IN",
-    data: {
-      id: id,
-      pw: pw,
-    },
+    type: "LOG_IN_REQUEST",
+    data
   };
 };
 
-export const logoutAction = () => {
+export const loginSuccessAction = (id, pw) => {
   return {
-    type: "LOG_OUT",
+    type: "LOG_IN_SUCCESS",
+    data
+  };
+};
+
+export const loginFailureAction = (id, pw) => {
+  return {
+    type: "LOG_IN_FAILURE",
+    data
+  };
+};
+
+export const logoutRequestAction = () => {
+  return {
+    type: "LOG_OUT_REQUEST",
+  };
+};
+
+export const logoutSuccessAction = () => {
+  return {
+    type: "LOG_OUT_SUCCESS",
+  };
+};
+
+export const logoutFailureAction = () => {
+  return {
+    type: "LOG_OUT_FAILURE",
   };
 };
 
