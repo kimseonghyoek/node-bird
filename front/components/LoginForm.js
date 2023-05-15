@@ -3,7 +3,7 @@ import Link from "next/dist/client/link";
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { loginAction } from "../reducers/user";
+import { loginRequestAction } from "../reducers/user";
 
 const ButtonWrap = styled.div`
   margin-top: 10px;
@@ -29,7 +29,7 @@ const LoginForm = () => {
 
   const onSubmitForm = useCallback(() => {
       console.log(id, pw);
-      dispatch(loginAction(id, pw));
+      dispatch(loginRequestAction(id, pw));
   }, [id, pw]);
 
   return (
