@@ -10,18 +10,19 @@ export default function* userSaga() {
     try {
       yield delay(1000);
       yield put({
-        type: 'LOG_IN_SUCCESS',
+        type: "LOG_IN_SUCCESS",
+        data: action.data,
       });
     } catch (err) {
       yield put({
-        type: 'LOG_IN_FAILURE',
+        type: "LOG_IN_FAILURE",
         data: err.response.data
       })
     }
   }
 
   function* watchLogin() {
-    yield takeLatest('LOG_IN_REQUEST', logIn())
+    yield takeLatest('LOG_IN_REQUEST', logIn)
   }
 
   function logoutAPI() {
