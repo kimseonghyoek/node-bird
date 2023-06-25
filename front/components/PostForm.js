@@ -1,19 +1,27 @@
 import { Button, Form, Input } from "antd";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useInput from '../hooks/useInput';
 import { addPost } from "../reducers/post";
 
 const PostForm = () => {
-  const { imagePaths } = useSelector((state) => state.post);
-  const [text, setText] = useInput("");
+  const { imagePaths, addPostDone } = useSelector((state) => state.post);
+  const [text, onChangeText, setText] = useInput("");
   const dispatch = useDispatch();
   const imageInput = useRef();
+
+  useEffect(() => {
+    if(addPostDone) {
+      setText('');
+    }
+  }, [addPostDone]);
+
   const onSubmit = useCallback(() => 
   {
-    dispatch(addPost);
+    dispatch(addPost(text));
     setText('');
-  }, []);
+  }, [text]);
+
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
   }, imageInput.current);
@@ -26,7 +34,7 @@ const PostForm = () => {
     >
       <Input.TextArea
         value={text}
-        onChange={setText}
+        onChange={onChangeText}
         maxLength={140}
         placeholder="어떤 신기한 일이 있었나요?"
       />
