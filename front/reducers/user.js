@@ -29,6 +29,14 @@ export const FOLLOW_REQUREST = "FOLLOW_REQUEST";
 export const FOLLOW_SUCCESS = "FOLLOW_SUCCESS";
 export const FOLLOW_FAILURE = "FOLLOW_FAILURE";
 
+export const UNFOLLOW_REQUREST = "UNFOLLOW_REQUEST";
+export const UNFOLLOW_SUCCESS = "UNFOLLOW_SUCCESS";
+export const UNFOLLOW_FAILURE = "UNFOLLOW_FAILURE";
+
+export const CHANGE_NICK_NAME_REQUEST = "CHANGE_NICK_NAME_REQUEST";
+export const CHANGE_NICK_NAME_SUCCESS = "CHANGE_NICK_NAME_SUCCESS";
+export const CHANGE_NICK_NAME_FAILURE = "CHANGE_NICK_NAME_FAILURE";
+
 export const loginRequestAction = (data) => {
   return {
     type: LOG_IN_REQUEST,
@@ -72,9 +80,9 @@ const dummyUser = (data) => ({
   ...data,
   nickname: "Overloper",
   id: 1,
-  Posts: [],
+  Posts: [2],
   Followings: [],
-  follwers: [],
+  Followers: [],
 });
 
 const reducer = (state = initalState, action) => {
@@ -85,7 +93,6 @@ const reducer = (state = initalState, action) => {
         logInLoading: true,
         logInError: null,
         logInDone: false,
-        me: action.data,
       };
     case LOG_IN_SUCCESS:
       return {
@@ -140,6 +147,25 @@ const reducer = (state = initalState, action) => {
           signUpLoading: false,
           signUpError: action.error,
         };
+        case CHANGE_NICK_NAME_REQUEST:
+          return {
+            ...state,
+            changeNicknameLoading: true,
+            changeNicknameDone: false,
+            changeNicknameError: null,
+          };
+        case CHANGE_NICK_NAME_SUCCESS:
+          return {
+            ...state,
+            changeNicknameLoading: false,
+            changeNicknameDone: true,
+          };
+        case CHANGE_NICK_NAME_FAILURE:
+          return {
+            ...state,
+            changeNicknameLoading: false,
+            changeNicknameError: action.error,
+          };
     default:
       return state;
   }

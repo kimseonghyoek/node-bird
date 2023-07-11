@@ -13,7 +13,7 @@ const SearchInput = styled(Input.Search)`
 
 const AppLayout = ({ children }) => {
 
-  const { me } = useSelector((state) => state.user.isLoggedIn);
+  const { me } = useSelector((state) => state.user);
 
   return (
     <div>

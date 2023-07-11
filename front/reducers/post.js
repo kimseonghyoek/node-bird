@@ -1,3 +1,5 @@
+import shortID from 'shortid';
+
 export const initalState = {
   mainPosts: [
     {
@@ -30,6 +32,9 @@ export const initalState = {
   addPostLoading: false,
   addPostDone: false,
   addPostError: null,
+  addCommentLoading: false,
+  addCommentDone: false,
+  addCommentError: null,
 };
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
@@ -49,16 +54,25 @@ export const addComment = (data) =>  ({
   data
 });
 
-const dummyPost = { 
-  id: 2,
-  content: 'dummy data',
+const dummyPost = (data) => ({ 
+  id: shortID.generate(),
+  content: data,
   User: {
     id: 1,
     nickname: "overloper"
   },
   Images: [],
   Comment: [],
-}
+});
+
+const dummyComment = (data) => ({
+  id: shortID.generate(),
+  content: data,
+  User: {
+    id: 1,
+    nickname: "overloper"
+  }
+})
 
 const reducer = (state = initalState, action) => {
   switch (action.type) {
@@ -68,39 +82,45 @@ const reducer = (state = initalState, action) => {
         addPostLoading: true,
         addPostDone: false,
         addPostError: null,
-      }
+      };
     case ADD_POST_SUCCESS:
       return {
         ...state,
-        mainPosts: [dummyPost, ...state.mainPosts],
+        mainPosts: [dummyPost(action.data), ...state.mainPosts],
         addPostLoading: false,
         addPostDone: true,
-      }
+      };
     case ADD_POST_FAILURE:
       return {
         ...state,
         addPostLoading: false,
         addPostError: action.error
-      }
+      };
       case ADD_COMMENT_REQUEST:
         return {
           ...state,
           addCommentLoading: true,
           addCommentDone: false,
           addCommentError: null,
-        }
+        };
       case ADD_COMMENT_SUCCESS:
-        return {
-          ...state,
-          addCommentLoading: false,
-          addCommentDone: true,
-        }
+      const postIndex = state.mainPosts.findIndex((v) => v.id === action.data.postId);
+      const post = { ...state.mainPosts[postIndex] };
+      post.Comment = [dummyComment(action.data.content), ...post.Comment];
+      const mainPosts = [...state.mainPosts];
+      mainPosts[postIndex] = post;
+      return {
+        ...state,
+        mainPosts,
+        addCommentLoading: false,
+        addCommentDone: true,
+      };
       case ADD_COMMENT_FAILURE:
         return {
           ...state,
           addCommentLoading: false,
           addCommentError: action.error
-        }
+        };
     default:
       return state;
   }
