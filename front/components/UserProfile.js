@@ -12,7 +12,7 @@ const UserProfile = () => {
 
     return (
         <Card actions={[
-            <div key="git">Github<br/>{me.Posts.length}</div>,
+            <div key="게시물">Github<br/>{me.Posts.length}</div>,
             <div key="following">팔로잉<br/>{me.Followings.length}</div>,
             <div key="follower">팔로워<br/>{me.Followers.length}</div>,
         ]}>
