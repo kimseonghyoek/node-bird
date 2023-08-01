@@ -22,7 +22,7 @@ function* addPost(action) {
     });
     yield put({
       type: ADD_POST_TO_ME,
-      data: { id }
+      data: id 
     })
   } catch(err) {
     yield put({
