@@ -1,8 +1,26 @@
-const http = require('http');
-const server = http.createServer((req, res) => {
-  console.log(req.url, req.method);
-  res.end('Hello, node!!')
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello, express");
 });
-server.listen(8080, () => {
-  console.log('서버 실행중');
+
+app.get("/api", (req, res) => {
+  res.send("Hello, API");
+});
+
+app.get("/api/posts", (req, res) => {
+  res.json([
+    { id: 1, content: "hello" },
+    { id: 2, content: "hello2" },
+    { id: 3, content: "hello3" },
+  ]);
+});
+
+app.post("/api/posts", (req, res) => {
+  res.json({ id: 1, content: 'hello' });
+});
+
+app.delete("/api/posts", (req, res) => {
+  res.json({  id:  1 });
 });
