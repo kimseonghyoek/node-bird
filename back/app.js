@@ -1,6 +1,11 @@
 const express = require("express");
 const app = express();
 const postRouter = require("./router/post");
+const db = require('./models');
+db.sequelize.sync()
+.then(() => {
+  console.log('DB 연결 성공')
+}).catch(console.error);
 
 app.get("/", (req, res) => {
   res.send("Hello, express");
