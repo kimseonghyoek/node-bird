@@ -2,12 +2,18 @@ const express = require("express");
 const app = express();
 const postRouter = require("./router/post");
 const userRouter = require("./router/user");
+const cors = require('cors');
 const db = require('./models');
 db.sequelize.sync()
 .then(() => {
   console.log('DB 연결 성공')
 }).catch(console.error);
 
+// app.use("여기에 들어가는 건 대부분 미들웨어")
+app.use(cors({
+  origin: true,
+  credentials: false
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
