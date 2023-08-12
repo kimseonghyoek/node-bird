@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {Avatar, Button, Card, Image, List, Popover, Comment } from "antd";
+import {Avatar, Button, Card, Image, List, Popover, } from "antd";
 import {
   EllipsisOutlined,
   HeartOutlined,
