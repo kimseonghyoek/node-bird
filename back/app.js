@@ -4,10 +4,12 @@ const postRouter = require("./router/post");
 const userRouter = require("./router/user");
 const cors = require('cors');
 const db = require('./models');
+const passportConfig = require('./passport');
 db.sequelize.sync()
 .then(() => {
   console.log('DB 연결 성공')
 }).catch(console.error);
+passportConfig();
 
 // app.use("여기에 들어가는 건 대부분 미들웨어")
 app.use(cors({
