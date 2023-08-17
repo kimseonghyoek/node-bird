@@ -3,15 +3,15 @@ import axios from "axios";
 import { FOLLOW_FAILURE, FOLLOW_REQUREST, FOLLOW_SUCCESS, LOG_IN_FAILURE, LOG_IN_REQUEST, LOG_IN_SUCCESS, LOG_OUT_FAILURE, LOG_OUT_REQUEST, LOG_OUT_SUCCESS, SIGN_UP_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, UNFOLLOW_FAILURE, UNFOLLOW_REQUREST, UNFOLLOW_SUCCESS } from '../reducers/user';
 
 function loginAPI(data) {
-  return axios.post("/api/login", data)
+  return axios.post("/user/login", data)
 }
 
 function* logIn(action) {
   try {
-    yield delay(1000);
+    const result = yield call(loginAPI, action.data);
     yield put({
       type: LOG_IN_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (err) {
     yield put({ 
@@ -26,7 +26,7 @@ function* watchLogin() {
 }
 
 function logoutAPI() {
-  return axios.post("/api/logout")
+  return axios.post("/logout")
 }
 
 function* logout() {
@@ -49,7 +49,7 @@ function* watchLogOut() {
 }
 
 function signUpAPI(data) {
-  return axios.post("http://localhost:8080/user", data);
+  return axios.post("/user", data);
 }
 
 function* signUp(action) {
