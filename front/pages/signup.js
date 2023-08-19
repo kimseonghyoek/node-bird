@@ -17,13 +17,13 @@ const Signup = () => {
   const { signUpLoading, signUpDone, signUpError } = useSelector((state) => state.user);
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
-  const [pw, onChangePw] = useInput('');
+  const [password, onChangePw] = useInput('');
   const [pwCheck, setPwCheck] = useState('');
   const [pwError, setPwError] = useState(false);
   const onChangePwCheck = useCallback((e) => {
     setPwCheck(e.target.value);
-    setPwError(e.target.value !== pw)
-  }, [pw]);
+    setPwError(e.target.value !== password)
+  }, [password]);
   const [term, setTerm] = useState(false);
   const [termError, setTermError] = useState(false);
   const onChangeTerm = useCallback(() => {
@@ -45,18 +45,18 @@ const Signup = () => {
 
 
   const onSubmit = useCallback(() => {
-    if(pw !== pwCheck) {
+    if(password !== pwCheck) {
       return setPwError(true);
     }
     if(!term) {
       return setTermError(true);
     }
-    console.log(email, nickname, pw);
+    console.log(email, nickname, password);
     dispatch({
       type: SIGN_UP_REQUEST,
-      data: {email, pw, nickname}
+      data: {email, password, nickname}
     })
-  }, [pw, pwCheck, term]);
+  }, [password, pwCheck, term]);
 
   return (
     <AppLayout>
@@ -77,7 +77,7 @@ const Signup = () => {
         <div>
           <label htmlFor="user-pw">비밀번호</label>
           <br/>
-          <Input name="user-pw" type="password" value={pw} required onChange={onChangePw}/>
+          <Input name="user-pw" type="password" value={password} required onChange={onChangePw}/>
         </div>
         <div>
           <label htmlFor="user-password-check">비밀번호체크</label>

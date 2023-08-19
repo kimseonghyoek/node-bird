@@ -4,7 +4,12 @@ const postRouter = require("./router/post");
 const userRouter = require("./router/user");
 const cors = require('cors');
 const db = require('./models');
+const dotenv = require('dotenv');
 const passportConfig = require('./passport');
+const passport = require("passport");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+dotenv.config();
 db.sequelize.sync()
 .then(() => {
   console.log('DB 연결 성공')
@@ -18,6 +23,14 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  saveUninitialized: false,
+  resave: false,
+  secret: process.env.COOKIE_SECRET
+}));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get("/", (req, res) => {
   res.send("Hello, express");

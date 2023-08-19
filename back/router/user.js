@@ -4,21 +4,23 @@ const router = express.Router();
 const { User } = require("../models");
 const passport = require('passport');
 
-router.post("/login", (req, res, next) => {
+router.post('/login', (req, res, next) => {
+  console.log(req.body.email)
   passport.authenticate('local', (err, user, info) => {
-    if(err) {
+    if (err) {
       console.error(err);
       return next(err);
     }
-    if(info) {
+    if (info) {
+      console.log(info)
       return res.status(401).send(info.reason);
     }
     return req.login(user, async (loginErr) => {
       if (loginErr) {
-        console.log(loginErr);
+        console.error(loginErr);
         return next(loginErr);
       }
-      return res.json(user);
+      return res.status(200).json(user);
     });
   })(req, res, next);
 });
@@ -33,7 +35,7 @@ router.post("/", async (req, res, next) => {
     if (exUser) {
       return res.status(403).send('이미 사용중인 아이디 입니다.');
     }
-    const hashedPassword = await bcrypt.hash(req.body.pw, 12);
+    const hashedPassword = await bcrypt.hash(req.body.password, 12);
     await User.create({
       email: req.body.email,
       nickname: req.body.nickname,

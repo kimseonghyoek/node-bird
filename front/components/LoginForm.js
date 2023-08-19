@@ -16,7 +16,7 @@ const FormWrapper = styled(Form)`
 const LoginForm = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
-  const [pw, setPw] = useState("");
+  const [password, setPw] = useState("");
   const { logInLoading } = useSelector((state) => state.user);
 
   // 컴포넌트에 props로 넘겨주는 함수에는 useCallback을 사용해라
@@ -29,9 +29,9 @@ const LoginForm = () => {
   }, []);
 
   const onSubmitForm = useCallback(() => {
-      console.log(email, pw);
-      dispatch(loginRequestAction(email, pw));
-  }, [email, pw]);
+      console.log(email, password);
+      dispatch(loginRequestAction({email, password}));
+  }, [email, password]);
 
   return (
     <FormWrapper onFinish={onSubmitForm}>
@@ -43,7 +43,7 @@ const LoginForm = () => {
       <div>
         <label htmlFor="user-pw">비밀번호</label>
         <br />
-        <Input.Password name="user-pw" value={pw} onChange={onChagePw} required />
+        <Input.Password name="user-pw" value={password} onChange={onChagePw} required />
       </div>
       <ButtonWrap>
         <Button type="primary" htmlType="submit" loading={logInLoading}>로그인</Button>

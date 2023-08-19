@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_OPTIONS=--openssl-legacy-provider next -p 3060"
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider next"
   },
   "author": "overloper",
   "license": "ISC",
