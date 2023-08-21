@@ -12,9 +12,9 @@ const UserProfile = () => {
 
     return (
         <Card actions={[
-            <div key="게시물">Github<br/>{me.Posts}</div>,
-            <div key="following">팔로잉<br/>{me.Followings}</div>,
-            <div key="follower">팔로워<br/>{me.Followers}</div>,
+            <div key="게시물">Github<br/>{me.Posts.length}</div>,
+            <div key="following">팔로잉<br/>{me.Followings.length}</div>,
+            <div key="follower">팔로워<br/>{me.Followers.length}</div>,
         ]}>
             <Card.Meta title={me.nickname} avatar={<Avatar>{me.nickname[0]}</Avatar>}/>
             <Button onClick={onLogOut} loading={logOutLoading }>로그아웃</Button>

@@ -1,6 +1,6 @@
 import { Button, Form, Input } from "antd";
 import Link from "next/dist/client/link";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
 import { loginRequestAction } from "../reducers/user";
@@ -17,7 +17,13 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPw] = useState("");
-  const { logInLoading } = useSelector((state) => state.user);
+  const { logInLoading, logInError } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (logInError) {
+      alert(logInError)
+    } 
+  }, [logInError]);
 
   // 컴포넌트에 props로 넘겨주는 함수에는 useCallback을 사용해라
   const onChageId = useCallback((e) => {
