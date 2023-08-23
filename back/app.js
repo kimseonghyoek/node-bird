@@ -19,7 +19,7 @@ passportConfig();
 // app.use("여기에 들어가는 건 대부분 미들웨어")
 app.use(cors({
   origin: true,
-  credentials: false
+  credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
