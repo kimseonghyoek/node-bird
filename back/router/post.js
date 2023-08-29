@@ -24,7 +24,7 @@ router.post("/", isLoggedIn, async (req, res, next) => {
         },
       ],
     });
-    res.status(201).json(post);
+    res.status(201).json(fullPost);
   } catch (err) {
     console.error(err);
     next(err);

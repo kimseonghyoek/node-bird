@@ -27,6 +27,25 @@ function* addPost(action) {
   }
 };
 
+function loadPostAPI(data) {
+  return axios.get('/posts', data);
+};
+
+function* loadPosts(action) {
+  try {
+    const result = yield call(loadPostAPI, action.data);
+    yield put({
+      type: LOAD_POST_SUCCESS,
+      data: result.data
+    })
+  } catch(err) {
+    yield put({
+      type: LOAD_POST_FAILURE,
+      data: err.response.data
+    })
+  }
+}
+
 function removePostAPI(data) {
   return axios.delete("/api/post", data);
 }

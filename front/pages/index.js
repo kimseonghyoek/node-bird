@@ -3,7 +3,7 @@ import AppLayout from "../components/AppLayout";
 import { useDispatch, useSelector } from "react-redux";
 import PostCard from "../components/PostCard";
 import PostForm from "../components/PostForm";
-import LOAD_MY_INFO_REQUEST from '../reducers/user';
+import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Home = () => {
     dispatch({
       type: LOAD_MY_INFO_REQUEST
     })
-  })
+  }, [])
 
   return (
     <AppLayout>

@@ -2,33 +2,7 @@ import shortID from "shortid";
 import { produce } from "immer";
 
 export const initalState = {
-  mainPosts: [
-    {
-      id: shortID.generate(),
-      User: {
-        id: 1,
-        nickname: "overloper",
-      },
-      content: "첫 번째 포스트! #해시태그 #First!!!",
-      Images: [
-        {
-          src: "https://i.pinimg.com/564x/60/30/fc/6030fca082167f3932af377cdb4f47bc.jpg",
-        },
-        {
-          src: "https://i.pinimg.com/564x/60/30/fc/6030fca082167f3932af377cdb4f47bc.jpg",
-        },
-      ],
-      Comment: [
-        {
-          id: shortID.generate(),
-          User: {
-            nickname: "son",
-          },
-          content: "우왓 아이묭!",
-        },
-      ],
-    },
-  ],
+  mainPosts: [],
   imagePaths: [],
   addPostLoading: false,
   addPostDone: false,
@@ -39,6 +13,10 @@ export const initalState = {
   addCommentLoading: false,
   addCommentDone: false,
   addCommentError: null,
+  loadPostsLoading: false,
+  loadPostsDone: false,
+  loadPostsError: null,
+  hasMorePosts: true,
 };
 
 export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
@@ -53,6 +31,10 @@ export const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST";
 export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
 export const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE";
 
+export const LOAD_POST_REQUEST = "LOAD_POST_REQUEST";
+export const LOAD_POST_SUCCESS = "LOAD_POST_SUCCESS";
+export const LOAD_POST_FAILURE = "LOAD_POST_FAILURE";
+
 export const addPost = (data) => ({
   type: ADD_POST_REQUEST,
   data,
@@ -62,18 +44,6 @@ export const addComment = (data) => ({
   type: ADD_COMMENT_REQUEST,
   data,
 });
-
-const dummyPost = (data) => ({
-  id: data.id,
-  content: data.content,
-  User: {
-    id: 1,
-    nickname: "overloper",
-  },
-  Images: [],
-  Comment: [],
-});
-
 
 const reducer = (state = initalState, action) => produce(state, (draft) => {
   switch (action.type) {
@@ -110,24 +80,24 @@ const reducer = (state = initalState, action) => produce(state, (draft) => {
       draft.addCommentDone = false;
       draft.addCommentError = null;
       break;
-    case ADD_COMMENT_SUCCESS: {
+    case ADD_COMMENT_SUCCESS: 
       const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
       post.Comments.unshift(action.data);
       draft.addCommentLoading = false;
       draft.addCommentDone = true;
       break;
-      // const postIndex = state.mainPosts.findIndex((v) => v.id === action.data.postId);
-      // const post = { ...state.mainPosts[postIndex] };
-      // post.Comments = [dummyComment(action.data.content), ...post.Comments];
-      // const mainPosts = [...state.mainPosts];
-      // mainPosts[postIndex] = post;
-      // return {
-      //   ...state,
-      //   mainPosts,
-      //   addCommentLoading: false,
-      //   addCommentDone: true,
-      // };
-    }
+    case LOAD_POST_REQUEST:
+      draft.loadPostsLoading = true;
+      draft.loadPostsDone = false;
+      draft.loadPostsError = null;
+    case LOAD_POST_SUCCESS:
+      draft.loadPostsLoading = false;
+      draft.loadPostsDone = true;
+      draft.mainPosts = action.data.concat(draft.mainPosts);
+      draft.hasMorePosts = draft.mainPosts.length < 50;
+    case LOAD_POST_FAILURE:
+      draft.loadPostsLoading = false;
+      draft.loadPostsError = true;
     case ADD_COMMENT_FAILURE:
       draft.addCommentLoading = false;
       draft.addCommentError = action.error;
