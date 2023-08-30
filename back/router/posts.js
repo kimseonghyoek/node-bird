@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const { Posts, User, Image } = require("../models");
+const { Post , User, Image } = require("../models");
 
 router.get("/", async (req, res, next) => {
   try {
-    const posts = await Posts.findAll({
+    const posts = await Post.findAll({
       limit: 10,
       offset: 0,
       order: [["createdAt", "DESC"]],
