@@ -94,15 +94,6 @@ export const logoutFailureAction = () => {
   };
 };
 
-const dummyUser = (data) => ({
-  ...data,
-  nickname: "Overloper",
-  id: 1,
-  Posts: [{ id: 1 }],
-  Followings: [{ nickname: '부기초' }, { nickname: 'Chanho Lee' }, { nickname: 'neue zeal' }],
-  Followers: [{ nickname: '부기초' }, { nickname: 'Chanho Lee' }, { nickname: 'neue zeal' }],
-});
-
 const reducer = (state = initalState, action) => produce(state, (draft) => {
   switch (action.type) {
     case LOAD_MY_INFO_REQUEST:
