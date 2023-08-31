@@ -1,7 +1,7 @@
 import { all, fork, delay, put, takeLatest, call } from 'redux-saga/effects';
 import axios from "axios";
-import { ADD_COMMENT_FAILURE, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_POST_FAILURE, ADD_POST_REQUEST, ADD_POST_SUCCESS, REMOVE_POST_FAILURE, REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS } from '../reducers/post';
-import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../reducers/user';
+import { ADD_COMMENT_FAILURE, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_POST_FAILURE, ADD_POST_REQUEST, ADD_POST_SUCCESS, LOAD_POST_FAILURE, LOAD_POST_SUCCESS, REMOVE_POST_FAILURE, REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS } from '../reducers/post';
+import { ADD_POST_TO_ME, LOAD_MY_INFO_REQUEST, REMOVE_POST_OF_ME } from '../reducers/user';
 import shortid from 'shortid';
 
 function addPostAPI(data) {
@@ -44,6 +44,10 @@ function* loadPosts(action) {
       data: err.response.data
     })
   }
+}
+
+function* watchLoadPosts() {
+  yield takeLatest(LOAD_MY_INFO_REQUEST, loadPosts)
 }
 
 function removePostAPI(data) {
@@ -104,6 +108,7 @@ function* watchAddComment() {
 
 export default function* postSaga() {
   yield all([
+    fork(watchLoadPosts),
     fork(watchAddPost),
     fork(watchRemovePost),
     fork(watchAddComment),

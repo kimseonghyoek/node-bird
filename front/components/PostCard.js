@@ -35,6 +35,7 @@ const PostCard = ({ post }) => {
 
   const id = useSelector((state) => state.user.me?.id);
     return (
+      console.log(post.User),
         <div style={{ marginBottom: 20}}>
             <Card
                 cover={post.Images[0] && <PostImages images={post.Images} />}
@@ -44,7 +45,7 @@ const PostCard = ({ post }) => {
                   <MessageOutlined key="comment" onClick={onToggleComment}/>,
                   <Popover key="more" content={(
                     <Button.Group>
-                      { id && post.User.id === id ? (
+                      { id && post.User === id ? (
                         <>
                           <Button>수정</Button>
                           <Button type="danger" loading={removePostLoading} onClick={onRemovePost}>삭제</Button>
@@ -60,7 +61,7 @@ const PostCard = ({ post }) => {
                 <Image/>
                 <Card.Meta
                   avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
-                  title={post.User.nickname}
+                  title={post.nickname}
                   description={<PostCardContent postData={post.content}/> }
                   />
             </Card>
