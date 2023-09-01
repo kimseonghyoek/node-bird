@@ -35,7 +35,7 @@ const PostCard = ({ post }) => {
 
   const id = useSelector((state) => state.user.me?.id);
     return (
-      console.log(post.User),
+      console.log(post.User.nickname),
         <div style={{ marginBottom: 20}}>
             <Card
                 cover={post.Images[0] && <PostImages images={post.Images} />}
@@ -60,8 +60,8 @@ const PostCard = ({ post }) => {
             >
                 <Image/>
                 <Card.Meta
-                  avatar={<Avatar>{post.nickname}</Avatar>}
-                  title={post.nickname}
+                  avatar={<Avatar>{post.User.nickname}</Avatar>}
+                  title={post.User.nickname}
                   description={<PostCardContent postData={post.content}/> }
                   />
             </Card>
