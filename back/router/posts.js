@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { Post , User, Image } = require("../models");
+const { Post , User, Image, Comment } = require("../models");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -16,6 +16,9 @@ router.get("/", async (req, res, next) => {
         {
           model: Image,
         },
+        {
+          model: Comment
+        }
       ],
     });
     console.log(posts);

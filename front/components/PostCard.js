@@ -67,7 +67,7 @@ const PostCard = ({ post }) => {
             </Card>
           {commentFormOpened && (<div>
             <CommentForm post={post}/>
-            <List header={`${post.Comment.length}개의 댓글`} itemLayout="horizontal" dataSource={post.Comment} renderItem={(item) => (
+            <List header={`${post.Comments.length}개의 댓글`} itemLayout="horizontal" dataSource={post.Comment} renderItem={(item) => (
               <List.Item>
                 <List.Item.Meta
                   title={<div>{item.User.nickname}</div>}
