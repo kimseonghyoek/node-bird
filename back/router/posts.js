@@ -12,12 +12,17 @@ router.get("/", async (req, res, next) => {
       include: [
         {
           model: User,
+          attributes: ['id', 'nickname']
         },
         {
           model: Image,
         },
         {
-          model: Comment
+          model: Comment,
+          include: [{
+            model: User,
+            attributes: ['id', 'nickname']
+          }]
         }
       ],
     });

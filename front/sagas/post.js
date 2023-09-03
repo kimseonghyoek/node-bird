@@ -83,6 +83,7 @@ function* watchRemovePost() {
 }
 
 function addCommentAPI(data) {
+  console.log(data)
   return axios.post(`/post/${data.postId}/comment`, data);
 }
 
@@ -90,7 +91,7 @@ function* addComment(action) {
   try {
     const result = yield call(addCommentAPI, action.data);
     yield put({
-      type: ADD_COMMENT_SUCCESS,
+      type: ADD_COMMENT_SUCCESS,  
       data: result.data,
     });
   } catch(err) {

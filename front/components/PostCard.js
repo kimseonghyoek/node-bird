@@ -35,7 +35,6 @@ const PostCard = ({ post }) => {
 
   const id = useSelector((state) => state.user.me?.id);
     return (
-      console.log(post.User.nickname),
         <div style={{ marginBottom: 20}}>
             <Card
                 cover={post.Images[0] && <PostImages images={post.Images} />}
@@ -67,7 +66,8 @@ const PostCard = ({ post }) => {
             </Card>
           {commentFormOpened && (<div>
             <CommentForm post={post}/>
-            <List header={`${post.Comments.length}개의 댓글`} itemLayout="horizontal" dataSource={post.Comment} renderItem={(item) => (
+            {console.log(post.Comments)}
+            <List header={`${post.Comments.length}개의 댓글`} itemLayout="horizontal" dataSource={post.Comments} renderItem={(item) => (
               <List.Item>
                 <List.Item.Meta
                   title={<div>{item.User.nickname}</div>}
