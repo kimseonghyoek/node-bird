@@ -12,15 +12,16 @@ function* likePost(action) {
     const result = yield call(likePostAPI, action.data);
     yield put({
       type: LIKE_POST_SUCCESS,
-      data: result.data
+      data: result.data,
     });
-  } catch(err) {
+  } catch (err) {
+    console.error(err);
     yield put({
       type: LIKE_POST_FAILURE,
-      data: err.response.data
-    })
+      error: err.response.data,
+    });
   }
-};
+}
 
 function unlikePostAPI(data) {
   return axios.delete(`/post/${data}/like`);
@@ -31,16 +32,16 @@ function* unlikePost(action) {
     const result = yield call(unlikePostAPI, action.data);
     yield put({
       type: UNLIKE_POST_SUCCESS,
-      data: result.data
+      data: result.data,
     });
-  } catch(err) {
+  } catch (err) {
+    console.error(err);
     yield put({
       type: UNLIKE_POST_FAILURE,
-      data: err.response.data
-    })
+      error: err.response.data,
+    });
   }
-};
-
+}
 function addPostAPI(data) {
   return axios.post("/post", { content: data});
 } 
