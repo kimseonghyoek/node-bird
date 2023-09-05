@@ -82,7 +82,7 @@ router.patch('/:postId/like', async (req, res, next) => {
   }
 });
 
-router.patch('/:postId/like', async (req, res, next) => {
+router.delete('/:postId/like', async (req, res, next) => {
   try {
     const post =  await Post.findOne({where: { id: req.params.postId }});
     if(!post) {
